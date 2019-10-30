@@ -3,6 +3,8 @@ package com.hbt.semillero.servicios;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.hbt.semillero.entidades.EstadoEnum;
+
 public class AppTest {
 
 	public void shouldAnswerWithTrue() {
@@ -32,7 +34,7 @@ public class AppTest {
 		actual = "abcde hola";
 		Assert.assertNotEquals(actual, cadenaEsperada);
 		
-		//verifica si la cadena vacia invertida es ifgual
+		//verifica si la cadena vacia invertida es igual
 		actual = " ";
 		cadenaEsperada = " ";
 		resultadoCadena = invertirCadena(actual);
@@ -65,8 +67,55 @@ public class AppTest {
         for (int x = cadena.length() - 1; x >= 0; x--) {
             cadenaInvertida = cadenaInvertida + cadena.charAt(x);
         }
-        
         return cadenaInvertida;
-
-}
+	}
+	
+	/**
+	 * Modificar la clase AppTest.java y crear un método test
+	 * que permita manipular el EstadoEnum, y validando las siguientes condiciones:
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	@Test
+    public void terceraPU() {
+       
+        //Instanciar un enum de la clase EstadoEnum
+        EstadoEnum estadoEnum = EstadoEnum.ACTIVO;
+       
+        //Devolver un String con el nombre de la constante (ACTIVO)
+        String estadoAsString = estadoEnum.name();
+       
+        //Devolver un entero con la posición del enum según está declarada
+        int posEstadoEnum = estadoEnum.ordinal();
+       
+        //Comparar el enum con el parámetro según el orden en el que están declarados lo enum
+      
+        int posEsperada = 0;
+       
+        //Assert para la posición de ACTIVO
+        Assert.assertEquals(posEstadoEnum, posEsperada);
+       
+       
+        //Assert para la posición de ACTIVO
+        estadoEnum = EstadoEnum.INACTIVO;
+        posEstadoEnum = estadoEnum.ordinal();
+        posEsperada = 1;
+               
+        Assert.assertEquals(posEstadoEnum, posEsperada);
+        
+       //Devolver un array que contiene todos los enum
+        EstadoEnum[] estados = EstadoEnum.values();
+        for (EstadoEnum estadoEnum2 : estados) {
+			System.out.println(estadoEnum2);
+		}
+       
+    }
+	
+	//TODO
+	/**
+	 * pedrinete hacer un metodo que use el metodo toString de la entidad comic
+	 */
+	
 }
