@@ -31,7 +31,7 @@ public class ComicDTO implements Serializable{
 	//Colleccion a que pertenece el comid
 	private String coleccion;
 	//Numero de paginas que contiene el comic
-	private Integer numeroPagina;
+	private Integer numeroPaginas;
 	//precio del comic
 	private BigDecimal precio;
 	//Los autores que tiene el comic
@@ -68,7 +68,7 @@ public class ComicDTO implements Serializable{
 		this.editorial = editorial;
 		this.tematicaEnum = tematica;
 		this.coleccion = coleccion;
-		this.numeroPagina = numeroPagina;
+		this.numeroPaginas = numeroPagina;
 		this.precio = precio;
 		this.autores = autores;
 		this.color = color;
@@ -225,7 +225,7 @@ public class ComicDTO implements Serializable{
 	 * @return
 	 */
 	public Integer getNumeroPagina() {
-		return numeroPagina;
+		return numeroPaginas;
 	}
 
 	/**
@@ -237,7 +237,7 @@ public class ComicDTO implements Serializable{
 	 * @param numeroPagina
 	 */
 	public void setNumeroPagina(Integer numeroPagina) {
-		this.numeroPagina = numeroPagina;
+		this.numeroPaginas = numeroPagina;
 	}
 
 	/**

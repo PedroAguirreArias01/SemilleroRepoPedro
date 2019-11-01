@@ -1,9 +1,15 @@
 package com.hbt.semillero.servicios;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.entidades.EstadoEnum;
+import com.hbt.semillero.entidades.TematicaEnum;
+import com.hbt.semillero.pojo.GestionarComicPOJO;
 
 public class AppTest {
 
@@ -110,8 +116,87 @@ public class AppTest {
         for (EstadoEnum estadoEnum2 : estados) {
 			System.out.println(estadoEnum2);
 		}
-       
     }
+	
+	/**
+	 * 
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	@Test
+	public void crearTestComic() {
+		
+		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
+		gestionarComicPOJO.crearComicDTO();
+		Assert.assertNull(gestionarComicPOJO.getListaComics());
+		Assert.assertTrue(gestionarComicPOJO.getListaComics().isEmpty());
+		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() != 0);
+	}
+	
+
+	@Test
+	public void creartComicDTOTest() {
+		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
+			
+		ComicDTO comicDTO = gestionarComicPOJO.crearComicDTOComic("101", "Captain America Corps 1-5 USA", "Panini Comics", TematicaEnum.FANTASTICO, "BIBLIOTECA MARVEL", 128, new BigDecimal(5000), "Phillippe Briones, Roger Stern", Boolean.FALSE, LocalDate.now(), EstadoEnum.ACTIVO, 5L);
+		
+		gestionarComicPOJO.agregarComicDTO(comicDTO);
+
+		Assert.assertNotNull(gestionarComicPOJO.getListaComics());
+		Assert.assertTrue(!gestionarComicPOJO.getListaComics().isEmpty());
+		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() == 1);
+
+		comicDTO = new ComicDTO();
+
+		comicDTO.setId("100");
+		comicDTO.setNombre("Dragon ball Yamcha");
+		comicDTO.setEditorial("Planeta Cómic");
+		comicDTO.setTematicaEnum(TematicaEnum.AVENTURAS);
+		comicDTO.setColeccion("Manga Shonen");
+		comicDTO.setNumeroPagina(100);
+		comicDTO.setPrecio(new BigDecimal(2100));
+		comicDTO.setAutores("Dragon Garow Lee");
+		comicDTO.setColor(Boolean.TRUE);
+		comicDTO.setFechaVenta(LocalDate.now());
+		comicDTO.setEstado(EstadoEnum.ACTIVO);
+		comicDTO.setCantidad(20L);
+
+		gestionarComicPOJO.agregarComicDTO(comicDTO);
+
+		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() > 1);
+
+		comicDTO = new ComicDTO();
+
+		comicDTO.setId("100");
+		comicDTO.setNombre("Dragon ball Yamcha");
+		comicDTO.setEditorial("Planeta Cómic");
+		comicDTO.setTematicaEnum(TematicaEnum.AVENTURAS);
+		comicDTO.setColeccion("Manga Shonen");
+		comicDTO.setNumeroPagina(100);
+		comicDTO.setPrecio(new BigDecimal(2100));
+		comicDTO.setAutores("Dragon Garow Lee");
+		comicDTO.setColor(Boolean.TRUE);
+		comicDTO.setFechaVenta(LocalDate.now());
+		comicDTO.setEstado(EstadoEnum.ACTIVO);
+		comicDTO.setCantidad(20L);
+
+		gestionarComicPOJO.agregarComicDTO(comicDTO);
+
+		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() == 3);
+	}
+	
+	/**
+	 * 
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	public void agregarComidDTO() {
+		
+	}
 	
 	//TODO
 	/**
