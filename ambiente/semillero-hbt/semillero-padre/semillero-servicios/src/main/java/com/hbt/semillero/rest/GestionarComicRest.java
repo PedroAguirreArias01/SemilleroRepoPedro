@@ -2,6 +2,7 @@ package com.hbt.semillero.rest;
 
 
 import javax.ejb.EJB;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -55,6 +56,14 @@ public class GestionarComicRest {
 			return gestionarComicEJB.consultarComic(idComic.toString());
 		}
 		return null;
+	}
+	
+	@DELETE
+	@Path("/eliminarComic")
+	public void  eliminarComic(@QueryParam("idComic") Long idComic) {
+		if (idComic != null) {
+			gestionarComicEJB.eliminarComic(idComic);
+		}
 	}
 }
 

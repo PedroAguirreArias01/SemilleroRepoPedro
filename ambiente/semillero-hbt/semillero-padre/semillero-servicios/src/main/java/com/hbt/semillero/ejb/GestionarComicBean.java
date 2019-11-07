@@ -2,15 +2,11 @@ package com.hbt.semillero.ejb;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-
-import org.hibernate.annotations.NotFound;
-
 import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.entidades.Comic;
 
@@ -156,6 +152,15 @@ public class GestionarComicBean implements IGestionarComicLocal {
         return comic;
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de comic a comicDTO
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param comic
+	 * @return
+	 */
 	private ComicDTO convertirComicToComicDTO(Comic comic) {
         ComicDTO comicDTO = new ComicDTO();
         if(comic.getId()!=null) {
