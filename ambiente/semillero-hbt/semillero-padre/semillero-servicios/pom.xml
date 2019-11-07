@@ -14,7 +14,16 @@
 	<packaging>war</packaging>
 
 	<name>Semillero HBT [REST]</name>
-
+	<!-- cambios-->
+	<profiles>
+        <profile>
+            <id>compile-angular</id>
+            <activation>
+                <property>
+                    <name>skipAngular</name>
+                    <value>!true</value>
+                </property>
+            </activation>
 	<build>
 		<resources>
 			<resource>
@@ -23,6 +32,9 @@
 			</resource>
 		</resources>
 	</build>
+</profile>
+</profiles>
+
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 		<dependency>

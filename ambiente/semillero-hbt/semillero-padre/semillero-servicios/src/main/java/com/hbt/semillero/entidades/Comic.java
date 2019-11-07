@@ -30,17 +30,17 @@ public class Comic implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private String id;
+	private Long id;
     private String nombre;
     private String editorial;
-    private String tematicaEnum;
+    private TematicaEnum tematicaEnum;
     private String coleccion;
     private Integer numeroPaginas;
     private BigDecimal precio;
     private String autores;
     private Boolean color;
     private LocalDate fechaVenta;
-    private String estadoEnum;
+    private EstadoEnum estadoEnum;
     private Long cantidad;
 
 	public Comic() {
@@ -51,7 +51,7 @@ public class Comic implements Serializable{
 	@Column(name = "SCID")
 	@SequenceGenerator(allocationSize = 1, name = "COMIC_SCID_GENERATOR", sequenceName = "SEQ_COMIC")
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "COMIC_SCID_GENERATOR")
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -63,7 +63,7 @@ public class Comic implements Serializable{
 	 * 
 	 * @param id
 	 */
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -127,7 +127,7 @@ public class Comic implements Serializable{
 	 */
 	@Column(name = "SCTEMATICA")
 	@Enumerated(value = EnumType.STRING)
-	public String getTematicaEnum() {
+	public TematicaEnum getTematicaEnum() {
 		return tematicaEnum;
 	}
 
@@ -139,7 +139,7 @@ public class Comic implements Serializable{
 	 * 
 	 * @param tematicaEnum
 	 */
-	public void setTematicaEnum(String tematicaEnum) {
+	public void setTematicaEnum(TematicaEnum tematicaEnum) {
 		this.tematicaEnum = tematicaEnum;
 	}
 
@@ -304,7 +304,7 @@ public class Comic implements Serializable{
 	 */
 	@Column(name = "SCESTADO")
 	@Enumerated(value = EnumType.STRING)
-	public String getEstadoEnum() {
+	public EstadoEnum getEstadoEnum() {
 		return estadoEnum;
 	}
 
@@ -316,7 +316,7 @@ public class Comic implements Serializable{
 	 * 
 	 * @param estadoEnum
 	 */
-	public void setEstadoEnum(String estadoEnum) {
+	public void setEstadoEnum(EstadoEnum estadoEnum) {
 		this.estadoEnum = estadoEnum;
 	}
 
