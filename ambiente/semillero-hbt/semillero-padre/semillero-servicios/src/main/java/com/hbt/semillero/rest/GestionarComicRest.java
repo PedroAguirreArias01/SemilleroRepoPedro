@@ -58,6 +58,14 @@ public class GestionarComicRest {
 		return null;
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de eliminar un comic pasando por parametro el .id del comic que se desea eliminar
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param idComic
+	 */
 	@DELETE
 	@Path("/eliminarComic")
 	public void  eliminarComic(@QueryParam("idComic") Long idComic) {
