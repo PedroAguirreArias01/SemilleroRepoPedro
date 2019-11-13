@@ -30,7 +30,7 @@ public class GestionarComicPOJOTest {
 	 * @author pedro
 	 *
 	 */
-	@Test
+	@Test(enabled=false)
 	public void crearComicDTOTest() {
 		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
 

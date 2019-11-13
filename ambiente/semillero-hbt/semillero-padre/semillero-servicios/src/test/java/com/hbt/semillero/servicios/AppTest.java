@@ -17,7 +17,7 @@ public class AppTest {
 
 	}
 	
-	@Test
+	@Test(enabled=false)
 	public void primeraPU() {
 		Long resultadoEsperado = 150L;
 		Long sumando1 = 100L;
@@ -28,7 +28,7 @@ public class AppTest {
 		Assert.assertNotEquals(resultado, resultadoEsperado);
 	}
 	
-	@Test
+	@Test(enabled=false)
 	public void segundaPU() {
 		//verifica que la cadena actual sea igual a la cadena esperada
 		String actual = "abcde";
@@ -84,7 +84,7 @@ public class AppTest {
 	 * @author pedro
 	 *
 	 */
-	@Test
+	@Test(enabled=false)
     public void terceraPU() {
        
         //Instanciar un enum de la clase EstadoEnum
@@ -125,7 +125,7 @@ public class AppTest {
 	 * @author pedro
 	 *
 	 */
-	@Test
+	@Test(enabled=false)
 	public void crearTestComic() {
 		
 		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
@@ -136,7 +136,7 @@ public class AppTest {
 	}
 	
 
-	@Test
+	@Test(enabled=false)
 	public void creartComicDTOTest() {
 		GestionarComicPOJO gestionarComicPOJO = new GestionarComicPOJO();
 			
@@ -185,6 +185,32 @@ public class AppTest {
 		gestionarComicPOJO.agregarComicDTO(comicDTO);
 
 		Assert.assertTrue(gestionarComicPOJO.getListaComics().size() == 3);
+	}
+	
+	/**
+	 * 
+	 * Metodo encargado de comparar cadenas mediante el igual 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	@Test(enabled = false)
+	public void comparandoCadenas() {
+		String s1 = "street";
+		String s2;
+		s2 = new String("street");
+		//if (s1 == s2) {
+			Assert.assertTrue(s1 == s2);
+		//}
+		
+	}
+	
+	@Test
+	public void ComparandoCadena2() {
+		String s1 = "street";
+		String s2;
+		s2 = new String("street");
+		Assert.assertEquals(s1, s2);
 	}
 	
 	/**
