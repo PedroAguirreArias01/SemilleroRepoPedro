@@ -159,5 +159,21 @@ public class EjerciciosPOJO {
 		return list;
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de validar el patron de incremento
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param numero1
+	 * @param numero2
+	 * @return
+	 */
+	public String patronIncremento(int numero1, int numero2) {
+		int resultado = numero1+ numero2+1;
+		return 1+""+(resultado-1);
+	}
+	
+	
 	
 }

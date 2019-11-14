@@ -115,4 +115,15 @@ public class EjerciciosTest {
 		ejerciciosPOJO.gestionarMonedas(5550);
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de validar la secuencia
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	public void validarPatronIncremento() {
+		EjerciciosPOJO ejerciciosPOJO = new EjerciciosPOJO();
+		ejerciciosPOJO.patronIncremento(3,2);
+	}
 }
