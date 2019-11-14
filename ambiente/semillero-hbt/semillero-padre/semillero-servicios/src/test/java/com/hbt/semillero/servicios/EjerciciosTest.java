@@ -1,5 +1,8 @@
 package com.hbt.semillero.servicios;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -62,5 +65,18 @@ public class EjerciciosTest {
 		Assert.assertEquals(resultadoActual, resultadoEsperado);
 	}
 	
-	
+	/**
+	 * 
+	 * Metodo encargado de validar un annio a partir de la fecha de nacimiento
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	@Test
+	public void validarAnnio() {
+		int resultActaul = 2019;
+		EjerciciosPOJO ejerciciosPOJO = new EjerciciosPOJO();
+		int esperado = ejerciciosPOJO.validarFechaNacimiento(LocalDate.of(2017, Month.DECEMBER, 15), 23);
+		Assert.assertEquals(resultActaul, esperado);
+	}
 }

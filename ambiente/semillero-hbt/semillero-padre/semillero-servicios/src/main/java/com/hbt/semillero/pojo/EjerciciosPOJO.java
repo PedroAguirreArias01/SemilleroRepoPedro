@@ -1,5 +1,7 @@
 package com.hbt.semillero.pojo;
 
+import java.time.LocalDate;
+
 /**
  * 
  * <b>Descripción:<b> Clase que determina la logica de los ejercicios
@@ -29,6 +31,19 @@ public class EjerciciosPOJO {
 		}else {
 			return false;
 		}
+	}
+	
+	/**
+	 * 
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param fechaNacimiento
+	 * @return
+	 */
+	public int validarFechaNacimiento(LocalDate fechaNacimiento, int numeroAnnios) {
+		return fechaNacimiento.getYear()+numeroAnnios;
 	}
 	
 }
