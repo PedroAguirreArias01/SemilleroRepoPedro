@@ -7,9 +7,9 @@ package com.hbt.semillero.pojo;
  * @author pedro
  * @version
  */
-public class Logica {
+public class EjerciciosPOJO {
 
-	public Logica() {
+	public EjerciciosPOJO() {
 		// TODO Auto-generated constructor stub
 	}
 	

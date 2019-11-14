@@ -3,7 +3,7 @@ package com.hbt.semillero.servicios;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.hbt.semillero.pojo.Logica;
+import com.hbt.semillero.pojo.EjerciciosPOJO;
 import com.hbt.semillero.pojo.WaterBottle;
 
 /**
@@ -48,7 +48,7 @@ public class EjerciciosTest {
 	 */
 	@Test
 	public void testEjercicioTres() {
-		Logica logica = new Logica();
+		EjerciciosPOJO logica = new EjerciciosPOJO();
 		boolean resultadoEsperado = logica.validarPrimo(5);
 		boolean resultadoActual = true;
 		Assert.assertEquals(resultadoActual, resultadoEsperado);
