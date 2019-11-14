@@ -3,7 +3,7 @@ import { ComicDTO } from '../../dto/comic.dto';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import Swal from 'sweetalert2';
 /**
  * @description Componenete gestionar comic, el cual contiene la logica CRUD
  * 
@@ -98,10 +98,17 @@ export class GestionarComicComponent implements OnInit {
             this.comic.id = this.idComic + "";
             this.listaComics.push(this.comic);
             this.limpiarFormulario();
-        }else{
+            Swal.fire(
+                'Comic creado con exito!',
+                'success'
+              );
+        } else {
             this.comic.id = this.idComic + "";
             this.listaComics[this.posComicEdit] = this.comic;
-            alert('Comic actualizado con exito!')
+            Swal.fire(
+                'Comic modificado con exito!',
+                'success'
+              );
             this.limpiarFormulario();
             this.editar = false;
         }
@@ -182,10 +189,41 @@ export class GestionarComicComponent implements OnInit {
      * @param posicion 
      */
     eliminarComic(posicion: number) {
-        if (posicion !== null) {
-            alert('Comic ' + this.listaComics[posicion].nombre + 'eliminado!');
-            this.listaComics.splice(posicion);
-        }
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+                confirmButton: 'btn btn-success',
+                cancelButton: 'btn btn-danger'
+            },
+            buttonsStyling: false
+        })
 
+        swalWithBootstrapButtons.fire({
+            title: 'Estás seguro?',
+            text: "No podrás revertir esto!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, bórralo!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                let nombre = this.listaComics[posicion].nombre;
+                this.listaComics.splice(posicion);
+                swalWithBootstrapButtons.fire(
+                    'Eliminado!',
+                    'El comic: ' + nombre + '  ha sido eliminado.',
+                    'success'
+                )
+            } else if (
+                /* Read more about handling dismissals below */
+                result.dismiss === Swal.DismissReason.cancel
+            ) {
+                swalWithBootstrapButtons.fire(
+                    'Cancelado',
+                    'Tu comic esta seguro :)',
+                    'error'
+                )
+            }
+        })
     }
 }

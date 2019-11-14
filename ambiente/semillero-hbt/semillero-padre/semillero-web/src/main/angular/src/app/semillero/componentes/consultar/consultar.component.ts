@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 /**
@@ -26,7 +26,7 @@ export class ConsultarComponent implements OnInit {
    * @param fb 
    * @param activatedRoute 
    */
-  constructor(private router: Router, private location: Location,private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router,private fb: FormBuilder, private activatedRoute: ActivatedRoute) {
     this.gestionarComicForm = this.fb.group({
       nombre: [null, Validators.required],
       editorial: [null],
