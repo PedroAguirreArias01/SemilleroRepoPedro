@@ -80,10 +80,16 @@ public class EjerciciosTest {
 		Assert.assertEquals(resultActaul, esperado);
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de validar el orden de los numeros
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
 	@Test
 	public void validarOrden() {
 		EjerciciosPOJO ejerciciosPOJO = new EjerciciosPOJO();
-		
 		ejerciciosPOJO.addNumeros(50);
 		ejerciciosPOJO.addNumeros(1);
 		ejerciciosPOJO.addNumeros(249);
