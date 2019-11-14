@@ -101,4 +101,18 @@ public class EjerciciosTest {
 		Assert.assertEquals(ultimo, aux[3]);
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de verificar el cambio
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 *
+	 */
+	@Test
+	public void testCambio() {
+		EjerciciosPOJO ejerciciosPOJO = new EjerciciosPOJO();
+		ejerciciosPOJO.gestionarMonedas(1000);
+		ejerciciosPOJO.gestionarMonedas(5550);
+	}
+	
 }
