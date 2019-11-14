@@ -1,6 +1,9 @@
 package com.hbt.semillero.pojo;
 
+import java.lang.reflect.Array;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 
@@ -14,6 +17,9 @@ public class EjerciciosPOJO {
 	public EjerciciosPOJO() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+	ArrayList<Integer> list = new ArrayList<Integer>();
 	
 	/**
 	 * 
@@ -35,7 +41,7 @@ public class EjerciciosPOJO {
 	
 	/**
 	 * 
-	 * Metodo encargado de 
+	 * Metodo encargado de validar fecha nacimiento
 	 * <b>Caso de Uso</b>
 	 * @author pedro
 	 * 
@@ -45,5 +51,48 @@ public class EjerciciosPOJO {
 	public int validarFechaNacimiento(LocalDate fechaNacimiento, int numeroAnnios) {
 		return fechaNacimiento.getYear()+numeroAnnios;
 	}
+	
+	/**
+	 * agrega los numeros a la lista
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param numero
+	 */
+	public void addNumeros(int numero) {
+		list.add(numero);
+	}
+
+	/**
+	 * ordenar lista
+	 * Metodo encargado de 
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param lista
+	 * @return
+	 */
+	public int[] ordenarLista(ArrayList<Integer> lista) {
+		int[] aux = new int[lista.size()];
+		for (int i = 0; i < lista.size(); i++) {
+			aux[i] = lista.get(i);
+		}
+		Arrays.sort(aux);
+		return aux;
+	}
+	
+	/**
+	 * 
+	 * Metodo encargado de restorna la lista
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @return
+	 */
+	public ArrayList<Integer> getList() {
+		return list;
+	}
+	
 	
 }

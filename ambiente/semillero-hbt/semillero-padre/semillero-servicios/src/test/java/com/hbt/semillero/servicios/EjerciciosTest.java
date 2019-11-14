@@ -76,7 +76,23 @@ public class EjerciciosTest {
 	public void validarAnnio() {
 		int resultActaul = 2019;
 		EjerciciosPOJO ejerciciosPOJO = new EjerciciosPOJO();
-		int esperado = ejerciciosPOJO.validarFechaNacimiento(LocalDate.of(2017, Month.DECEMBER, 15), 23);
+		int esperado = ejerciciosPOJO.validarFechaNacimiento(LocalDate.of(1995, Month.DECEMBER, 23), 23);
 		Assert.assertEquals(resultActaul, esperado);
 	}
+	
+	@Test
+	public void validarOrden() {
+		EjerciciosPOJO ejerciciosPOJO = new EjerciciosPOJO();
+		
+		ejerciciosPOJO.addNumeros(50);
+		ejerciciosPOJO.addNumeros(1);
+		ejerciciosPOJO.addNumeros(249);
+		ejerciciosPOJO.addNumeros(-2);
+		int esperado = -2;
+		int ultimo = 249;
+		int []aux = ejerciciosPOJO.ordenarLista(ejerciciosPOJO.getList());
+		Assert.assertEquals(esperado, aux[0]);
+		Assert.assertEquals(ultimo, aux[3]);
+	}
+	
 }
