@@ -7,7 +7,7 @@ import { ConsultarComponent } from './semillero/componentes/consultar/consultar.
 const routes: Routes = [
   { path: 'gestionar-comic', component: GestionarComicComponent },
   { path: 'bienvenida', component: BienvenidaComponent, data : null },
-  /**
+    /**
    * redirige al modulo consultar comic conla informacion del comic seleccionado
    * @author Pedro Aguirre Arias
    */

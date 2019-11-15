@@ -101,14 +101,14 @@ export class GestionarComicComponent implements OnInit {
             Swal.fire(
                 'Comic creado con exito!',
                 'success'
-              );
+            );
         } else {
             this.comic.id = this.idComic + "";
             this.listaComics[this.posComicEdit] = this.comic;
             Swal.fire(
                 'Comic modificado con exito!',
                 'success'
-              );
+            );
             this.limpiarFormulario();
             this.editar = false;
         }
