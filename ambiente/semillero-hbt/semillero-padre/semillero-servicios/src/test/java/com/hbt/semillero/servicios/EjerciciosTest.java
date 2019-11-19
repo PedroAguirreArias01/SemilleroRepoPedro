@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.hbt.semillero.pojo.EjerciciosPOJO;
-import com.hbt.semillero.pojo.WaterBottle;
 
 /**
  * 
@@ -20,13 +19,12 @@ public class EjerciciosTest {
 	
 
 	
-	@Test
-	public static void ejercicioDos() {
-		WaterBottle wb = new WaterBottle();
-		System.err.println("Empty="+wb.empty);
-		System.err.println("Empty="+wb.brand);
-		//Sale error de compilación porque no se ha creado la clase WaterBottle
-	}
+//	@Test
+//	public static void ejercicioDos() {
+//		WaterBottle wb = new WaterBottle();
+//		System.err.println("Empty="+wb.brand);
+//		//Sale error de compilación porque no se ha creado la clase WaterBottle
+//	}
 
 	/**
 	 * son validos A$B, _helloWorld, 
