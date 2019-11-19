@@ -1,0 +1,58 @@
+<div class="card">
+   <h4>Gestión de pedidos</h4>
+   <form [formGroup]="FormGroup">
+      <div class="row">
+         <div class="col-sm-6">
+            <label for="comic">Seleccione el comic:</label>
+            <select class="form-control" formControlName="comic">
+               <option value="comic" *ngFor="let comic of listaComics">{{comic.nombre}}</option>
+            </select>
+         </div>
+         <div class="col-sm-6">
+            <div class="col-4">
+               <label for="cantidad">Cantidad comics:</label>
+               <input type="number" class="form-control" id="cantidad" formControlName="cantidadComic">
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="form-group">
+               <label for="tipoFactura">Tipo Factura:</label>
+               <select class="form-control" id="tipoFactura" formControlName="tipoFactura">
+                  <option value="PEDIDO">PEDIDO</option>
+                  <option value="VENTA">VENTA</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <div class="form-group">
+               <label for="estadoFactura">Estado factura:</label>
+               <select class="form-control" id="estadoFactura" formControlName="estadoFactura">
+                  <option value="SOLICITADO">SOLICITADO</option>
+                  <option value="PENDIENTE">PENDIENTE</option>
+                  <option value="DEPORTIVO">ENTREGADO</option>
+               </select>
+            </div>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-sm-6">
+            <div class="form-group">
+               <label for="comic">Seleccione el proveedor:</label>
+               <select class="form-control" formControlName="proveedor">
+                  <option value="" *ngFor="let comic of listaComics">{{comic.nombre}}</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-sm-6">
+            <label for="comic">Seleccione el cliente:</label>
+            <select class="form-control" formControlName="cliente">
+               <option value="" *ngFor="let comic of listaComics">{{comic.nombre}}</option>
+            </select>
+         </div>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Crear Pedido/Editar</button>
+   </form>
+</div>

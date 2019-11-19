@@ -1,0 +1,29 @@
+<div class="container">
+    <h1>Gestion de Proveedores</h1>
+    <div class="row">
+        <form action="" [formGroup]="gestionarPersonaForm">
+            <div class="row">
+                <div class="col-6">
+                    <label for="nombrePersona">Nombre Persona:</label>
+                    <input type="text" class="form-control" id="nombrePersona" formControlName="nombre">
+                </div>
+
+                <div class="col-6">
+                    <label for="numPersona">Numero de identificación:</label>
+                    <input type="number" class="form-control" id="numPersona" formControlName="numIdentificacion">
+                </div>
+
+                <div class="row">
+                    <div class="col-6">
+                        <span></span>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button type="button" class="btn btn-primary"
+                            (click)="crearPersonaYProveedor()">Crear/Editar</button>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>

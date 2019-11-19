@@ -23,6 +23,8 @@ import {EjemploService} from './semillero/services/ejemplo.service';
 import {AbstractService} from './semillero/services/template.service';
 
 import { ConsultarComponent } from './semillero/componentes/consultar/consultar.component';
+import { GestionarPedidoComponent } from './semillero/componentes/gestionar-pedido/gestionar-pedido.component';
+import { GestionarProveedorComponent } from './semillero/componentes/gestionar-proveedor/gestionar-proveedor.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { ConsultarComponent } from './semillero/componentes/consultar/consultar.
     BienvenidaComponent,
     CrearPersonaComponent,
     GestionarComicComponent,
-    ConsultarComponent
+    ConsultarComponent,
+    GestionarPedidoComponent,
+    GestionarProveedorComponent
   ],
   imports: [
     BrowserModule,

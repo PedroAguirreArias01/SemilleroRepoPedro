@@ -2,6 +2,7 @@ package com.hbt.semillero.ejb;
 
 import java.lang.annotation.Retention;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -12,7 +13,9 @@ import javax.ejb.TransactionManagementType;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.dto.FacturaDTO;
+import com.hbt.semillero.dto.ProveedorDTO;
 import com.hbt.semillero.dto.ResultadoDTO;
 import com.hbt.semillero.entidad.EstadoFacturaEnum;
 import com.hbt.semillero.entidad.Factura;
@@ -83,6 +86,50 @@ public class GestionarPedidoBean  implements IGestionarPedidoLocal{
 		factura.setTipoFacturaEnum(factura.getTipoFacturaEnum());
 		return factura;
 	}
+	
+	/**
+	 * 
+	 * Metodo encargado de convertir un ProveedorDTO a proveedor
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param proveedor
+	 * @return
+	 */
+	public Proveedor convertirPorveedorDTOTOPorvedor(ProveedorDTO proveedorDTO) {
+		Proveedor proveedor = new Proveedor();
+		if (proveedor.getId() != null) {
+			proveedor.setId(proveedorDTO.getId());
+		}
+		proveedor.setDirreccion(proveedorDTO.getDirreccion());
+		proveedor.setEstado(proveedorDTO.getEstado());
+		proveedor.setFechaCreacion(proveedorDTO.getFechaCreacion());
+		proveedor.setMontoCredito(proveedorDTO.getMontoCredito());
+		proveedor.setPersona(proveedorDTO.getPersona());
+		return proveedor;
+	}
+	
+	/**
+	 * 
+	 * Metodo encargado de convertir un proveedor a ProveedorDTO
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param proveedor
+	 * @return
+	 */
+	public ProveedorDTO convertirProveedorTOProveedorDTO(Proveedor proveedor) {
+		ProveedorDTO proveedorDTO = new ProveedorDTO();
+		if (proveedor.getId() != null) {
+			proveedor.setId(proveedor.getId());
+		}
+		proveedorDTO.setDirreccion(proveedor.getDirreccion());
+		proveedorDTO.setEstado(proveedor.getEstado());
+		proveedorDTO.setFechaCreacion(proveedor.getFechaCreacion());
+		proveedorDTO.setMontoCredito(proveedor.getMontoCredito());
+		proveedorDTO.setPersona(proveedor.getPersona());
+		return proveedorDTO;
+	}
 
 	/**
 	 * 
@@ -91,9 +138,17 @@ public class GestionarPedidoBean  implements IGestionarPedidoLocal{
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void crearFactura(FacturaDTO facturaDTO) {
-		Factura factura = convertirFacturaDTOToFactura(facturaDTO);
-		// Se almacena la informacion y se maneja la enidad factura
-		em.persist(factura);
+		List<Factura> listaFacturas = em.createQuery("select f from Factura f").getResultList();
+		for (Factura factura : listaFacturas) {
+			for (FacturaDetalle facturaDetalle : factura.getFacturaDetalle()) {
+				if (facturaDetalle.getCantidad() < 5) {
+					Factura facturaGuardar = convertirFacturaDTOToFactura(facturaDTO);
+					// Se almacena la informacion y se maneja la enidad factura
+					em.persist(facturaGuardar);
+				}
+			}
+		}
+
 	}
 
 	/**
@@ -183,7 +238,6 @@ public class GestionarPedidoBean  implements IGestionarPedidoLocal{
 	@Override
 	public ResultadoDTO validarPedidosDespachado(Long idFactura) {
 		Factura factura = em.find(Factura.class, idFactura);
-		Persona persona = factura.getProveedor().getPersona();
 		if (factura.getProveedor().getFechaCreacion().getDayOfMonth()> factura.getProveedor().getFechaCreacion().getDayOfMonth()+5 ) {
 			if(factura.getEstadoFacturaEnum().equals(EstadoFacturaEnum.PENDIENTE)) {
 				return new ResultadoDTO(true, "Pedido Fue despachado");
@@ -192,6 +246,32 @@ public class GestionarPedidoBean  implements IGestionarPedidoLocal{
 			}
 		}
 		return new ResultadoDTO(false, "No han pasado los 5 dias para verificacion");
+	}
+
+	/**
+	 * Modificado
+	 * @see com.hbt.semillero.ejb.IGestionarPedidoLocal#consultarPedidos()
+	 */
+	@Override
+	@TransactionAttribute(TransactionAttributeType.NOT_SUPPORTED)
+	public List<FacturaDTO> consultarPedidos() {
+		List<FacturaDTO> resultadosFacturaDTO = new ArrayList<FacturaDTO>();
+		List<Factura> resultados = em.createQuery("select f from Factura f").getResultList();
+		for (Factura factura : resultados) {
+			resultadosFacturaDTO.add(convertirFacturaToFacturaDTO(factura));
+		}
+		return resultadosFacturaDTO;
+	}
+
+	/**
+	 * 
+	 * @see com.hbt.semillero.ejb.IGestionarPedidoLocal#crearProveedor(com.hbt.semillero.dto.ProveedorDTO)
+	 */
+	@Override
+	public void crearProveedor(ProveedorDTO proveedorDTO) {
+		Proveedor proveedor = convertirPorveedorDTOTOPorvedor(proveedorDTO);
+		em.persist(proveedor);
+		
 	}
 	
 }

@@ -1,9 +1,12 @@
 package com.hbt.semillero.ejb;
 
 import java.math.BigDecimal;
+import java.util.List;
 
+import com.hbt.semillero.dto.ComicDTO;
 import com.hbt.semillero.dto.FacturaDTO;
 import com.hbt.semillero.dto.FacturaDetalleDTO;
+import com.hbt.semillero.dto.ProveedorDTO;
 import com.hbt.semillero.dto.ResultadoDTO;
 
 /**
@@ -76,4 +79,24 @@ public interface IGestionarPedidoLocal {
 	 * @param idFactura
 	 */
 	public ResultadoDTO validarPedidosDespachado(Long idFactura);
+	
+	/**
+	 * 
+	 * Metodo encargado de consultar todos los pedidos
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @return
+	 */
+	public List<FacturaDTO> consultarPedidos();
+	
+	/**
+	 * 
+	 * Metodo encargado de crear proveedor
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param proveedorDTO
+	 */
+	public void crearProveedor(ProveedorDTO proveedorDTO);
 }

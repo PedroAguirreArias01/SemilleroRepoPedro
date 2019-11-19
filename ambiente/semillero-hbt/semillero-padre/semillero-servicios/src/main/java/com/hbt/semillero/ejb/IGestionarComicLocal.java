@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Local;
 
 import com.hbt.semillero.dto.ComicDTO;
+import com.hbt.semillero.dto.ProveedorDTO;
 import com.hbt.semillero.dto.ResultadoDTO;
 
 /**
@@ -77,4 +78,7 @@ public interface IGestionarComicLocal {
 	 * @return
 	 */
 	public ResultadoDTO editar(ComicDTO comicDTO);
+	
+	
+	
 }
