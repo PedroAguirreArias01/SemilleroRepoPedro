@@ -1,5 +1,7 @@
 package com.hbt.semillero.ejb;
 
+import java.lang.annotation.Retention;
+import java.time.LocalDate;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -15,6 +17,8 @@ import com.hbt.semillero.dto.ResultadoDTO;
 import com.hbt.semillero.entidad.EstadoFacturaEnum;
 import com.hbt.semillero.entidad.Factura;
 import com.hbt.semillero.entidad.FacturaDetalle;
+import com.hbt.semillero.entidad.Persona;
+import com.hbt.semillero.entidad.Proveedor;
 
 /**
  * 
@@ -159,14 +163,35 @@ public class GestionarPedidoBean  implements IGestionarPedidoLocal{
 	 */
 	@Override
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public void modificarPedido(Long cantidadComics, String nombreProveedor, Long idFactura) {
+	public void modificarPedido(Long idComic, Long cantidadComics, String nombreProveedor, Long idFactura) {
 		Factura factura = em.find(Factura.class, idFactura);
+		Persona persona = factura.getProveedor().getPersona();
+		persona.setNombre(nombreProveedor);
+		List<FacturaDetalle> listDetalles = factura.getFacturaDetalle();
+		for (FacturaDetalle facturaDetalle : listDetalles) {
+			if (facturaDetalle.getComic().getId() == idComic) {
+				facturaDetalle.setCantidad(cantidadComics);
+			}
+		}
+		
 	}
 
+	/**
+	 * metodo que se encarga de validar si el pedido fue despachado
+	 * @see com.hbt.semillero.ejb.IGestionarPedidoLocal#validarPedidosDespachado(java.lang.Long)
+	 */
 	@Override
-	public void validarPedidosDespachado(Long idFactura) {
-		// TODO Auto-generated method stub
-		
+	public ResultadoDTO validarPedidosDespachado(Long idFactura) {
+		Factura factura = em.find(Factura.class, idFactura);
+		Persona persona = factura.getProveedor().getPersona();
+		if (factura.getProveedor().getFechaCreacion().getDayOfMonth()> factura.getProveedor().getFechaCreacion().getDayOfMonth()+5 ) {
+			if(factura.getEstadoFacturaEnum().equals(EstadoFacturaEnum.PENDIENTE)) {
+				return new ResultadoDTO(true, "Pedido Fue despachado");
+			}else {
+				return new ResultadoDTO(false, "Pedido No despachado");
+			}
+		}
+		return new ResultadoDTO(false, "No han pasado los 5 dias para verificacion");
 	}
 	
 }

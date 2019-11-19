@@ -98,4 +98,17 @@ public class GestionarPedidoRest {
 		return new ResultadoDTO(true, "Factura eliminada con exito");
 	}
 	
+	@POST
+	@Path("/modificarPedido")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResultadoDTO modificarPedido(Long idComic, Long cantidadComics, String nombreProveedor, Long idFactura) {
+		gestionarPedidoBean.modificarPedido(idComic, cantidadComics, nombreProveedor, idFactura);
+		return new ResultadoDTO(true, "Pedido modificado con exito");
+	}
+	
+	
+	public ResultadoDTO validarPedidoDespachado(Long idFactura) {
+		return gestionarPedidoBean.validarPedidosDespachado(idFactura);
+	}
+	
 }

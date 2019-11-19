@@ -64,16 +64,16 @@ public interface IGestionarPedidoLocal {
 	 * @param nombreProveedor
 	 * @return
 	 */
-	public void modificarPedido(Long cantidadComics,String nombreProveedor, Long idFactura);
+	public void modificarPedido(Long idComic, Long cantidadComics,String nombreProveedor, Long idFactura);
 	
 	
 	/**
 	 * 
-	 * Metodo encargado de 
+	 * Metodo encargado de validar si el pedido fue despachado
 	 * <b>Caso de Uso</b>
 	 * @author pedro
 	 * 
 	 * @param idFactura
 	 */
-	public void validarPedidosDespachado(Long idFactura);
+	public ResultadoDTO validarPedidosDespachado(Long idFactura);
 }
