@@ -46,6 +46,16 @@ public class GestionarPedidoRest {
 		return new ResultadoDTO(true, "Factura creada con exito");
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de cambair el estado de la factjura
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param idFactura
+	 * @param estado
+	 * @return
+	 */
 	@POST
 	@Path("/cambiarEstado")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -54,6 +64,16 @@ public class GestionarPedidoRest {
 		return gestionarPedidoBean.cambiarEstadoPedido(idFactura, estado);
 	}
 	
+	/**
+	 * 
+	 * Metodo encargado de calcualr el total de la factura
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param idFactura
+	 * @return
+	 * @throws Exception
+	 */
 	@GET
 	@Path("/consultarTotal")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -61,6 +81,21 @@ public class GestionarPedidoRest {
 		return this.gestionarPedidoBean.totalPedido(idFactura);
 	}
 	
-	
+	/**
+	 * 
+	 * Metodo encargado de elimianr la factura
+	 * <b>Caso de Uso</b>
+	 * @author pedro
+	 * 
+	 * @param idFactura
+	 * @return
+	 */
+	@POST
+	@Path("/eliminar")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ResultadoDTO eliminarFactura(Long idFactura) {
+		gestionarPedidoBean.eliminarFactura(idFactura);
+		return new ResultadoDTO(true, "Factura eliminada con exito");
+	}
 	
 }
