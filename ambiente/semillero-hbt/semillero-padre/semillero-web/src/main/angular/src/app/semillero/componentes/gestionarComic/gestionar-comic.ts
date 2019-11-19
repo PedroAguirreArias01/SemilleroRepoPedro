@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { GestionarComicService } from '../../services/gestionar.comic.service';
+import { ResultadoDTO } from '../../dto/resultado.dto';
 /**
  * @description Componenete gestionar comic, el cual contiene la logica CRUD
  * 
@@ -31,8 +33,6 @@ export class GestionarComicComponent implements OnInit {
      */
     public listaComics: Array<ComicDTO>;
 
-    public idComic: number = 0;
-
     /**
      * Atributo que indica si se envio a validar el formulario
      */
@@ -52,7 +52,7 @@ export class GestionarComicComponent implements OnInit {
      * @description Este es el constructor del componente GestionarComicComponent
      * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
      */
-    constructor(private fb: FormBuilder,
+    constructor(private fb: FormBuilder, private gestionarComicService: GestionarComicService,
         private router: Router) {
         this.gestionarComicForm = this.fb.group({
             nombre: [null, Validators.required],
@@ -62,7 +62,8 @@ export class GestionarComicComponent implements OnInit {
             numeroPaginas: [null],
             precio: [null],
             autores: [null],
-            color: [null]
+            color: [null],
+            cantidad: [null, Validators.required]
         });
     }
 
@@ -71,9 +72,9 @@ export class GestionarComicComponent implements OnInit {
      * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
      */
     ngOnInit(): void {
-        console.log("Ingreso al al evento oninit");
         this.comic = new ComicDTO();
         this.listaComics = new Array<ComicDTO>();
+        this.consultarComics();
     }
 
     /**
@@ -93,26 +94,49 @@ export class GestionarComicComponent implements OnInit {
         this.comic.precio = this.gestionarComicForm.controls.precio.value;
         this.comic.autores = this.gestionarComicForm.controls.autores.value;
         this.comic.color = this.gestionarComicForm.controls.color.value;
+        this.comic.cantidad = this.gestionarComicForm.controls.cantidad.value;
+        this.comic.numeroPaginas = 20;
         if (!this.editar) {
-            this.idComic++;
-            this.comic.id = this.idComic + "";
-            this.listaComics.push(this.comic);
-            this.limpiarFormulario();
-            Swal.fire(
-                'Comic creado con exito!',
-                'success'
-            );
-        } else {
-            this.comic.id = this.idComic + "";
-            this.listaComics[this.posComicEdit] = this.comic;
-            Swal.fire(
-                'Comic modificado con exito!',
-                'success'
-            );
-            this.limpiarFormulario();
-            this.editar = false;
-        }
+            this.gestionarComicService.crearComic(this.comic).subscribe(resultadoDTO => {
+                if (resultadoDTO.exitoso) {
+                    Swal.fire(
+                        'Comic creado con exito!',
+                        'success'
+                    );
+                    this.consultarComics();
+                    this.limpiarFormulario();
+                }
+            }, error => {
+                console.log(error);
+            });
 
+        } else {
+            console.log('antes')
+            this.gestionarComicService.editar(this.comic).subscribe(resultadoDTO => {
+                console.log('despues')
+                if (resultadoDTO.exitoso) {
+                    this.consultarComics();
+                    Swal.fire(
+                        'Comic modificado con exito!',
+                        'success'
+                    );
+                    this.limpiarFormulario();
+                    this.editar = false;
+                }
+            });
+        }
+    }
+
+    /**
+     * @description Metodo encargado de consultar los comics existentes
+     * @author Diego Fernando Alvarez Silva <dalvarez@heinsohn.com.co>
+     */
+    public consultarComics(): void {
+        this.gestionarComicService.consultarComics().subscribe(listaComics => {
+            this.listaComics = listaComics;
+        }, error => {
+            console.log(error);
+        });
     }
 
     /**
@@ -188,7 +212,7 @@ export class GestionarComicComponent implements OnInit {
      * @author Pedro Aguirre Arias
      * @param posicion 
      */
-    eliminarComic(posicion: number) {
+    eliminarComic(comic: ComicDTO) {
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
                 confirmButton: 'btn btn-success',
@@ -207,13 +231,23 @@ export class GestionarComicComponent implements OnInit {
             reverseButtons: true
         }).then((result) => {
             if (result.value) {
-                let nombre = this.listaComics[posicion].nombre;
-                this.listaComics.splice(posicion);
-                swalWithBootstrapButtons.fire(
-                    'Eliminado!',
-                    'El comic: ' + nombre + '  ha sido eliminado.',
-                    'success'
-                )
+                let comicAux: ComicDTO = comic;
+                this.gestionarComicService.eliminarComic(comic.id).subscribe(resultadoDTO =>{
+                    if(resultadoDTO.exitoso){
+                        swalWithBootstrapButtons.fire(
+                            'Eliminado!',
+                            'El comic: ' + comicAux.nombre + '  ha sido eliminado.',
+                            'success'
+                        )
+                        this.consultarComics();
+                    }else{
+                        swalWithBootstrapButtons.fire(
+                            'No se ha eliminado!',
+                            'El comic: ' + comicAux.nombre + '  No ha sido eliminado.',
+                            'success'
+                        )
+                    }
+                });
             } else if (
                 /* Read more about handling dismissals below */
                 result.dismiss === Swal.DismissReason.cancel
