@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * <b>Descripción:<b> Clase que determina la entidad que permite representar la
  * tabla "DB_SEMILLERO"."COMIC"
  * 
- * @author ccastano
+ * @author pedro
  * @version
  */
 @Entity
@@ -35,17 +35,53 @@ public class Comic implements Serializable {
 	 * array de bytes.
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * atributo que representa id del comic
+	 */
 	private Long id;
+	/**
+	 * nombre del comic
+	 */
 	private String nombre;
+	/**
+	 * Atrinuto que representa la editorial 
+	 */
 	private String editorial;
+	/**
+	 * Atrinuto que representa la tematica del comic
+	 */
 	private TematicaEnum tematicaEnum;
+	/**
+	 * Atrinuto que representa la coleccion del comic
+	 */
 	private String coleccion;
+	/**
+	 * Atrinuto que representa el numero de paginas del comic
+	 */
 	private Integer numeroPaginas;
+	/**
+	 * Atrinuto que representa el precio del comic
+	 */
 	private BigDecimal precio;
+	/**
+	 * Atrinuto que representa los autores del comic
+	 */
 	private String autores;
+	/**
+	 * Atrinuto que representa el color del comic
+	 */
 	private Boolean color;
+	/**
+	 * Atrinuto que representa la fecha venta del comic
+	 */
 	private LocalDate fechaVenta;
+	/**
+	 * Atrinuto que representa el esatado del comic
+	 */
 	private EstadoEnum estadoEnum;
+	/**
+	 * Atrinuto que representa la cantidad de comics
+	 */
 	private Long cantidad;
 
 	/**

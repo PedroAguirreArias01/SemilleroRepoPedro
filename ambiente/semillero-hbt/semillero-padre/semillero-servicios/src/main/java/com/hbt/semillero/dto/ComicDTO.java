@@ -16,7 +16,10 @@ import com.hbt.semillero.entidad.TematicaEnum;
 public class ComicDTO implements Serializable {
 
 	/**
-	 * Atributo que determina
+	 * Serializar es pasar un Objeto a un array de bytes y viceversa. Atributo que
+	 * determina serialVersionUID es el id único que identifica una clase cuando lo
+	 * serializamos. ;ediante este id podemos identificar el objeto convertido en un
+	 * array de bytes.
 	 */
 	private static final long serialVersionUID = 1L;
 
